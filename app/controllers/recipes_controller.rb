@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @cuisines = Cuisine.all
   end
 
   def create
@@ -16,7 +17,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type, :cuisine, :difficulty,
+    params.require(:recipe).permit(:title, :recipe_type, :cuisine_id, :difficulty,
                                   :cook_time, :cook_method, :ingredients)
   end
 end

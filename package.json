@@ -1,5 +1,7 @@
 {
   "name": "my-cookbook",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "systeminformation": "^3.42.2"
+  }
 }
