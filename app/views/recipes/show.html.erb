@@ -1,4 +1,5 @@
 <h1><%= @recipe.title %></h1>
+<%= flash[:success] %>
 <h3>Detalhes</h3>
 <p><%= @recipe.recipe_type %></p>
 <p><%= @recipe.cuisine.name %></p>
@@ -8,5 +9,5 @@
 <p><%= @recipe.ingredients %></p>
 <h3>Como Preparar</h3>
 <p><%= @recipe.cook_method %></p>
-
+<%= image_tag @recipe.photo.url %>
 <%= link_to 'Voltar', root_path %>

@@ -15,10 +15,12 @@ feature 'Visitor register recipe' do
     fill_in 'Tempo de Preparo', with: '45'
     fill_in 'Ingredientes', with: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha'
     fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão a gosto.'
+    attach_file 'Foto', Rails.root.join('spec', 'support', 'tabule.jpg')
     click_on 'Enviar'
 
 
     expect(page).to have_css('h1', text: 'Tabule')
+    expect(page).to have_css("img[src*='tabule.jpg']")
     expect(page).to have_css('h3', text: 'Detalhes')
     expect(page).to have_css('p', text: 'Entrada')
     expect(page).to have_css('p', text: 'Arabe')
@@ -28,5 +30,16 @@ feature 'Visitor register recipe' do
     expect(page).to have_css('p', text: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha')
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão a gosto.')
+  end
+
+  scenario 'and must fill in all fields' do
+    # dados pré cadastrados
+    Cuisine.create(name: 'Italiana')
+    # navegação
+    visit root_path
+    click_on 'Enviar uma receita'
+    click_on 'Enviar'
+    # expectativas
+    expect(page).to have_content 'Não foi possível cadastrar sua receita'
   end
 end
